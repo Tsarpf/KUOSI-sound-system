@@ -1,4 +1,6 @@
+$(window).load(function(){
 var audio    = new Audio();
+
     playlist = $('#playlist');
 
     playlist.on('click', 'li', function() {
@@ -10,3 +12,4 @@ var audio    = new Audio();
 
 audio.controls = true;
 document.body.appendChild(audio);
+});
