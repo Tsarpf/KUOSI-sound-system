@@ -29,10 +29,6 @@ std::string GetFileNamesString()
 
 int main(int argc, char** argv)
 {
-    
-    std::cout << GetFileNamesString() << std::endl;
-
-    std::string filenames = GetFileNamesString();
     //Now that this stuff works, pls refactor it into
     //functions instead of having everything inside main...
 
@@ -104,7 +100,7 @@ int main(int argc, char** argv)
             }
 
             //filenames were enumerated at the start of main.
-            std::string data = filenames;
+            std::string data = GetFileNamesString();
             ::send(newSocket, data.c_str(), data.size(), MSG_NOSIGNAL);
             std::cout << "sent: '" << data << "'" << std::endl;
         }
