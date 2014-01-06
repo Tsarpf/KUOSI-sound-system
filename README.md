@@ -7,4 +7,7 @@ I decided that coding a nodejs server for the task would be too trivial so I mad
 
 I solved the problem by using websockify which works as a converter between the two. Now the C++ server can send and receive everything in TCP, and client-side javascript can send&receive everything conforming to the WebSocket protocol.
 
-Yay.
+Websockify only supports data conforming to the "protocols" binary and base64 and I wanted to see if I could use just binary. client-side javascript receives the stuff as a blob type thingy, so it needs to be converted back to text which is done within findFileNames.js.
+
+
+So now the two can exchange strings between eachother, yay.
