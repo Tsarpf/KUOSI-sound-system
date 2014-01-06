@@ -1,7 +1,6 @@
 var socket;
-var fileNamesString;
 $(window).load(function(){
-    socket = new WebSocket("ws://localhost:3614", "binary");
+    socket = new WebSocket("ws://localhost:3613", "binary");
 
     socket.onmessage = function (evt) {
         var blob = evt.data;
@@ -9,7 +8,7 @@ $(window).load(function(){
 
         reader.addEventListener("loadend", function() {
             fileNamesString = reader.result;
-            console.log(reader.result);
+            onSongListReady();
         });
 
         reader.readAsText(blob);
