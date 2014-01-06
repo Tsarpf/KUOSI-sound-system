@@ -1,17 +1,42 @@
 #include <string>
-#include <fcntl.h>
 #include <iostream>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <arpa/inet.h>
 #include <errno.h>
 #include <cstring>
+#include <dirent.h>
+
+std::string GetFileNamesString()
+{
+    DIR* dirStream;
+    struct dirent* dir;
+
+    dirStream = opendir("../songs/");
+
+
+    std::string files = "";
+    if(dirStream != NULL)
+    {
+        while(dir = readdir(dirStream))
+        {
+            files += dir->d_name;
+            files += "\n";
+        }
+    }
+
+    return files;
+}
 
 int main(int argc, char** argv)
 {
+    
+    std::cout << GetFileNamesString() << std::endl;
+
+    std::string filenames = GetFileNamesString();
+    //Now that this stuff works, pls refactor it into
+    //functions instead of having everything inside main...
+
+
     //construct
     sockaddr_in m_addr;
     memset(&m_addr, 0, sizeof(m_addr));
@@ -77,7 +102,9 @@ int main(int argc, char** argv)
             {
                 std::cout << "Received: '" << buf << "'." << std::endl;
             }
-            std::string data = "ykskakskolmenelja";
+
+            //filenames were enumerated at the start of main.
+            std::string data = filenames;
             ::send(newSocket, data.c_str(), data.size(), MSG_NOSIGNAL);
             std::cout << "sent: '" << data << "'" << std::endl;
         }
@@ -89,7 +116,3 @@ int main(int argc, char** argv)
     }
 }
 
-int SocketSend()
-{
-
-}
