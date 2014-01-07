@@ -1,2 +1,9 @@
+body {
+	background: center top url('kuosi.png') fixed no-repeat;
+	padding:0;
+	}
+#playlist a:active {
+	text-decoration:underline;
+	}
 li { cursor: pointer; }
 li.current { font-weight: bold};
