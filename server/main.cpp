@@ -11,7 +11,8 @@ std::string GetFileNamesString()
     DIR* dirStream;
     struct dirent* dir;
 
-    dirStream = opendir("../songs/");
+    //Todo: load paths like this from configuration file
+    dirStream = opendir("/home/tsarpf/public_html/KUOSI-sound-system/songs/");
 
 
     std::string files = "";

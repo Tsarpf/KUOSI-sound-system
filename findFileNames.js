@@ -1,6 +1,6 @@
 var socket;
 $(window).load(function(){
-    socket = new WebSocket("ws://localhost:3613", "binary");
+    socket = new WebSocket("ws://datisbox.net:3613", "binary");
 
     socket.onmessage = function (evt) {
         var blob = evt.data;
