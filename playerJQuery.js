@@ -1,39 +1,68 @@
+var audio;
 $(window).load(function(){
-var audio    = new Audio();
-
+    audio = new Audio();
     playlist = $('#playlist');
-
-    playlist.on('click', 'li', function() {
-        playlist.find('.current').removeClass('current');
-        $(this).addClass('current');
-        audio.src = $(this).data('src');
-        audio.play();
-    });
+    playlist.on('click', 'li', playSong);
 
 audio.controls = true;
 document.body.appendChild(audio);
 });
 
+function playSong(elem) {
+    playlist.find('.current').removeClass('current');
+    if(!elem) {
+        elem = $(this);
+    }
+    elem.addClass('current');
+    audio.src = elem.data('src');
+    audio.play();
+}
+
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
 function onSongListReady()
 {
-    console.log("penis");
     var songs = buildSongArray();
-    console.log("penis");
 
     createListElements(songs); 
-    console.log("penis");
+
+
+    var link;
+
+    var vars = getUrlVars();
+    for(var param in vars) {
+        var name = vars[param];
+        if(songs.indexOf(name) >= 0) {
+            playLinkedSong(name);
+        }
+    }
+
+}
+
+function playLinkedSong(name) {
+    var elem = $('li:contains("' + name + '")');
+    playSong(elem);
+
 }
 
 var jotain;
 function createListElements(songArray)
 {
-    console.log("penis");
     jotain = songArray;
     for(var i = 0; i < songArray.length; i++)
     {
-        console.log("penis");
         $('ul').append('<li data-src="songs/' + songArray[i] + '"> ' + songArray[i] + ' </li>');
-        console.log("tys");
     }
 
 
